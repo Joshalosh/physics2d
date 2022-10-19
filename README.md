@@ -1,2 +1,2 @@
-# physics2d
-A simple 2d physics engine.
+# Physics2D
+A simple 2D physics engine.
