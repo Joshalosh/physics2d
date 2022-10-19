@@ -36,3 +36,6 @@
 
 # Debug files
 *.pdb
+
+# Directories
+build/
