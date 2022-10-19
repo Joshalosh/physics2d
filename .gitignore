@@ -33,3 +33,6 @@
 
 # Timings
 *.ctm
+
+# Debug files
+*.pdb
