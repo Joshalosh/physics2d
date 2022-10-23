@@ -28,13 +28,15 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-            {
-                mouse_position = GetMousePosition();
-                //DrawCircle(GetMouseX(), GetMouseY(), 25.0f, BLUE);
-            }
+            Rectangle rec_one = {400, 225, 40, 40};
+            Rectangle rec_two = {300, 225, 40, 40};
+            DrawRectangleRec(rec_one, RED);
+            DrawRectangleRec(rec_two, BLUE);
 
-            DrawCircle(mouse_position.x, mouse_position.y, 25.0f, BLUE);
+            if(CheckCollisionRecs(rec_one, rec_two))
+            {
+                int x = 1;
+            }
 
         EndDrawing();
         //----------------------------------------------------------------------------------
