@@ -29,7 +29,7 @@ union Vec2
     {
         real32 u, v;
     };
-    real32 E[2];
+    real32 e[2];
 };
 
 union Vec3 
@@ -45,24 +45,24 @@ union Vec3
     struct
     {
         Vec2 xy;
-        real32 Ignored0_;
+        real32 ignored0_;
     };
     struct
     {
-        real32 Ignored1_;
+        real32 ignored1_;
         Vec2 yz;
     };
     struct
     {
         Vec2 uv;
-        real32 Ignored2_;
+        real32 ignored2_;
     };
     struct
     {
-        real32 Ignored3_;
+        real32 ignored3_;
         Vec2 vw;
     };
-    real32 E[3];
+    real32 e[3];
 };
 
 //
@@ -70,38 +70,155 @@ union Vec3
 //
 
 inline Vec2
-Perp(Vec2 A)
+Perp(Vec2 a)
 {
-    Vec2 Result = {-A.y, A.x};
+    Vec2 result = {-a.y, a.x};
 
-    return(Result);
+    return result;
 }
 
 inline Vec2
-operator*(real32 A, Vec2 B)
+operator*(real32 a, Vec2 b)
 {
-    Vec2 Result;
+    Vec2 result;
 
-    Result.x = A*B.x;
-    Result.y = A*B.y;
+    result.x = a * b.x;
+    result.y = a * b.y;
 
-    return(Result);
+    return result;
 }
 
 inline Vec2
-operator*(Vec2 B, real32 A)
+operator*(Vec2 b, real32 a)
 {
-    Vec2 Result = A*B;
+    Vec2 result = a * b;
 
-    return(Result);
+    return result;
 }
 
 inline Vec2 &
-operator*=(Vec2&B, real32 A)
+operator*=(Vec2 &b, real32 a)
 {
-    B = A * B;
+    b = a * b;
 
-    return(B);
+    return b;
+}
+
+inline Vec2
+operator-(Vec2 a)
+{
+    Vec2 result;
+
+    result.x = -a.x;
+    result.y = -a.y;
+
+    return result;
+}
+
+inline Vec2
+operator+(Vec2 a, Vec2 b)
+{
+    Vec2 result;
+
+    result.x = a.x + b.x;
+    result.y = a.y + b.y;
+
+    return result;
+}
+
+inline Vec2 &
+operator+=(Vec2 &a, Vec2 b)
+{
+    a = a + b;
+
+    return a;
+}
+
+inline Vec2
+operator-(Vec2 a, Vec2 b)
+{
+    Vec2 result;
+
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
+
+    return result;
+}
+
+//
+// Vec3 OPERATIONS
+//
+
+inline Vec3
+operator*(real32 a, Vec3 b)
+{
+    Vec3 result;
+
+    result.x = a * b.x;
+    result.y = a * b.y;
+    result.z = a * b.z;
+
+    return result;
+}
+
+inline Vec3
+operator*(Vec3 b, real32 a)
+{
+    Vec3 result = a * b;
+
+    return result;
+}
+
+inline Vec3 &
+operator*=(Vec3 &b, real32 a)
+{
+    b = a * b;
+
+    return b;
+}
+
+inline Vec3
+operator-(Vec3 a)
+{
+    Vec3 result;
+
+    result.x = -a.x;
+    result.y = -a.y;
+    result.z = -a.z;
+
+    return result;
+}
+
+inline Vec3
+operator+(Vec3 a, Vec3 b)
+{
+    Vec3 result;
+
+    result.x = a.x + b.x;
+    result.y = a.y + b.y;
+    result.z = a.z + b.z;
+
+    return result;
+}
+
+inline Vec3 &
+operator+=(Vec3 &a, Vec3 b)
+{
+    a = a + b;
+
+    return a;
+}
+
+inline Vec3
+operator-(Vec3 a, Vec3 b)
+{
+    Vec3 result;
+
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
+    result.z = a.z - b.z;
+
+    return result;
 }
 
 #define ENGINE_MATH_H
