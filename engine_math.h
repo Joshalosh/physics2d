@@ -19,7 +19,7 @@ typedef float real32;
 #define PI32 = 3.141592741f;
 #define EPSILON = 0.0001f;
 
-union Vec2
+union v2
 {
     struct
     {
@@ -32,7 +32,7 @@ union Vec2
     real32 e[2];
 };
 
-union Vec3 
+union v3 
 {
     struct
     {
@@ -44,43 +44,78 @@ union Vec3
     };
     struct
     {
-        Vec2 xy;
+        v2 xy;
         real32 ignored0_;
     };
     struct
     {
         real32 ignored1_;
-        Vec2 yz;
+        v2 yz;
     };
     struct
     {
-        Vec2 uv;
+        v2 uv;
         real32 ignored2_;
     };
     struct
     {
         real32 ignored3_;
-        Vec2 vw;
+        v2 vw;
     };
     real32 e[3];
 };
+
+inline v2
+Vec2(real32 x, real32 y)
+{
+    v2 result;
+
+    result.x = x;
+    result.y = y;
+    
+    return result;
+}
+
+inline v3
+Vec3(real32 x, real32 y, real32 z)
+{
+    v3 result;
+
+    result.x = x;
+    result.y = y;
+    result.z = z;
+    
+    return result;
+}
+
+inline v3
+Vec3(v2 xy, real32 z)
+{
+    v3 result;
+
+    result.x = xy.x;
+    result.y = xy.y;
+    result.z = z;
+
+    return result;
+}
 
 //
 // Vec2 OPERATIONS
 //
 
-inline Vec2
-Perp(Vec2 a)
+inline v2
+Perp(v2 a)
 {
-    Vec2 result = {-a.y, a.x};
+    v2 result = {-a.y, a.x};
 
     return result;
 }
 
-inline Vec2
-operator*(real32 a, Vec2 b)
+inline v2
+operator*(real32 a, v2 b)
 {
-    Vec2 result;
+    v2 result;
 
     result.x = a * b.x;
     result.y = a * b.y;
@@ -88,26 +123,26 @@ operator*(real32 a, Vec2 b)
     return result;
 }
 
-inline Vec2
-operator*(Vec2 b, real32 a)
+inline v2
+operator*(v2 b, real32 a)
 {
-    Vec2 result = a * b;
+    v2 result = a * b;
 
     return result;
 }
 
-inline Vec2 &
-operator*=(Vec2 &b, real32 a)
+inline v2 &
+operator*=(v2 &b, real32 a)
 {
     b = a * b;
 
     return b;
 }
 
-inline Vec2
-operator-(Vec2 a)
+inline v2
+operator-(v2 a)
 {
-    Vec2 result;
+    v2 result;
 
     result.x = -a.x;
     result.y = -a.y;
@@ -115,10 +150,10 @@ operator-(Vec2 a)
     return result;
 }
 
-inline Vec2
-operator+(Vec2 a, Vec2 b)
+inline v2
+operator+(v2 a, v2 b)
 {
-    Vec2 result;
+    v2 result;
 
     result.x = a.x + b.x;
     result.y = a.y + b.y;
@@ -126,18 +161,18 @@ operator+(Vec2 a, Vec2 b)
     return result;
 }
 
-inline Vec2 &
-operator+=(Vec2 &a, Vec2 b)
+inline v2 &
+operator+=(v2 &a, v2 b)
 {
     a = a + b;
 
     return a;
 }
 
-inline Vec2
-operator-(Vec2 a, Vec2 b)
+inline v2
+operator-(v2 a, v2 b)
 {
-    Vec2 result;
+    v2 result;
 
     result.x = a.x - b.x;
     result.y = a.y - b.y;
@@ -149,10 +184,10 @@ operator-(Vec2 a, Vec2 b)
 // Vec3 OPERATIONS
 //
 
-inline Vec3
-operator*(real32 a, Vec3 b)
+inline v3
+operator*(real32 a, v3 b)
 {
-    Vec3 result;
+    v3 result;
 
     result.x = a * b.x;
     result.y = a * b.y;
@@ -161,26 +196,26 @@ operator*(real32 a, Vec3 b)
     return result;
 }
 
-inline Vec3
-operator*(Vec3 b, real32 a)
+inline v3
+operator*(v3 b, real32 a)
 {
-    Vec3 result = a * b;
+    v3 result = a * b;
 
     return result;
 }
 
-inline Vec3 &
-operator*=(Vec3 &b, real32 a)
+inline v3 &
+operator*=(v3 &b, real32 a)
 {
     b = a * b;
 
     return b;
 }
 
-inline Vec3
-operator-(Vec3 a)
+inline v3
+operator-(v3 a)
 {
-    Vec3 result;
+    v3 result;
 
     result.x = -a.x;
     result.y = -a.y;
@@ -189,10 +224,10 @@ operator-(Vec3 a)
     return result;
 }
 
-inline Vec3
-operator+(Vec3 a, Vec3 b)
+inline v3
+operator+(v3 a, v3 b)
 {
-    Vec3 result;
+    v3 result;
 
     result.x = a.x + b.x;
     result.y = a.y + b.y;
@@ -201,18 +236,18 @@ operator+(Vec3 a, Vec3 b)
     return result;
 }
 
-inline Vec3 &
-operator+=(Vec3 &a, Vec3 b)
+inline v3 &
+operator+=(v3 &a, v3 b)
 {
     a = a + b;
 
     return a;
 }
 
-inline Vec3
-operator-(Vec3 a, Vec3 b)
+inline v3
+operator-(v3 a, v3 b)
 {
-    Vec3 result;
+    v3 result;
 
     result.x = a.x - b.x;
     result.y = a.y - b.y;
