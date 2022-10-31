@@ -1,4 +1,5 @@
 #include "src/raylib.h"
+#include "collisions.cpp"
 
 #define MAX_COLUMNS 20
 

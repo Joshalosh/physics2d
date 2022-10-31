@@ -1,11 +1,17 @@
 #if !defined(SHAPES_H)
 
-#include "src/raylib.h"
+#include "engine_math.h"
 
-struct AABB
+struct aabb
 {
-    Vector2 Min;
-    Vector2 Max;
+    v2 Min;
+    v2 Max;
+};
+
+struct circle 
+{
+    real32 radius;
+    v2 position;
 };
 
 #define SHAPES_H
