@@ -10,7 +10,7 @@ struct aabb
 
 struct circle 
 {
-    real32 radius;
+    r32 radius;
     v2 position;
 };
 

@@ -13,7 +13,7 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 
 typedef int32_t b32;
-typedef float real32;
+typedef float r32;
 
 #define PI32 = 3.141592741f;
 #define EPSILON = 0.0001f;
@@ -22,50 +22,50 @@ union v2
 {
     struct
     {
-        real32 x, y;
+        r32 x, y;
     };
     struct
     {
-        real32 u, v;
+        r32 u, v;
     };
-    real32 e[2];
+    r32 e[2];
 };
 
 union v3 
 {
     struct
     {
-        real32 x, y, z;
+        r32 x, y, z;
     };
     struct
     {
-        real32 u, v, w;
+        r32 u, v, w;
     };
     struct
     {
         v2 xy;
-        real32 ignored0_;
+        r32 ignored0_;
     };
     struct
     {
-        real32 ignored1_;
+        r32 ignored1_;
         v2 yz;
     };
     struct
     {
         v2 uv;
-        real32 ignored2_;
+        r32 ignored2_;
     };
     struct
     {
-        real32 ignored3_;
+        r32 ignored3_;
         v2 vw;
     };
-    real32 e[3];
+    r32 e[3];
 };
 
 inline v2
-Vec2(real32 x, real32 y)
+Vec2(r32 x, r32 y)
 {
     v2 result;
 
@@ -76,7 +76,7 @@ Vec2(real32 x, real32 y)
 }
 
 inline v3
-Vec3(real32 x, real32 y, real32 z)
+Vec3(r32 x, r32 y, r32 z)
 {
     v3 result;
 
@@ -88,7 +88,7 @@ Vec3(real32 x, real32 y, real32 z)
 }
 
 inline v3
-Vec3(v2 xy, real32 z)
+Vec3(v2 xy, r32 z)
 {
     v3 result;
 
@@ -112,7 +112,7 @@ Perp(v2 a)
 }
 
 inline v2
-operator*(real32 a, v2 b)
+operator*(r32 a, v2 b)
 {
     v2 result;
 
@@ -123,7 +123,7 @@ operator*(real32 a, v2 b)
 }
 
 inline v2
-operator*(v2 b, real32 a)
+operator*(v2 b, r32 a)
 {
     v2 result = a * b;
 
@@ -131,7 +131,7 @@ operator*(v2 b, real32 a)
 }
 
 inline v2 &
-operator*=(v2 &b, real32 a)
+operator*=(v2 &b, r32 a)
 {
     b = a * b;
 
@@ -184,7 +184,7 @@ operator-(v2 a, v2 b)
 //
 
 inline v3
-operator*(real32 a, v3 b)
+operator*(r32 a, v3 b)
 {
     v3 result;
 
@@ -196,7 +196,7 @@ operator*(real32 a, v3 b)
 }
 
 inline v3
-operator*(v3 b, real32 a)
+operator*(v3 b, r32 a)
 {
     v3 result = a * b;
 
@@ -204,7 +204,7 @@ operator*(v3 b, real32 a)
 }
 
 inline v3 &
-operator*=(v3 &b, real32 a)
+operator*=(v3 &b, r32 a)
 {
     b = a * b;
 
