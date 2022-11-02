@@ -5,19 +5,22 @@ ctime -begin physics2d.ctm
 set CompilerFlags= /Zi /MDd /FC /nologo
 REM set LinkerFlags=-subsystem:Console
 
-IF NOT EXIST build mkdir build
+IF NOT EXIST build (
+    mkdir build
+    pushd build
+
+    cl %CompilerFlags% /c /D PLATFORM_DESKTOP /I..\src\external\glfw\include ^
+        ..\src\rcore.c ^
+        ..\src\rmodels.c ^
+        ..\src\raudio.c ^
+        ..\src\rglfw.c ^
+        ..\src\rshapes.c ^
+        ..\src\rtext.c ^
+        ..\src\rtextures.c ^
+        ..\src\utils.c
+)
 
 pushd build
-
-cl %CompilerFlags% /c /D PLATFORM_DESKTOP /I..\src\external\glfw\include ^
-    ..\src\rcore.c ^
-    ..\src\rmodels.c ^
-    ..\src\raudio.c ^
-    ..\src\rglfw.c ^
-    ..\src\rshapes.c ^
-    ..\src\rtext.c ^
-    ..\src\rtextures.c ^
-    ..\src\utils.c
 
 cl %CompilerFlags% ^
     ..\main.cpp ^
