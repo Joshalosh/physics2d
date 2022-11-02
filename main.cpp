@@ -15,29 +15,70 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "Physics2D");
 
+    Vector2 ball1_position = {((r32)screenWidth*0.25), (r32)screenHeight/2};
+    Vector2 ball2_position = {((r32)screenWidth*0.75), (r32)screenHeight/2};
+    Vector2 ball3_position = {((r32)screenWidth*0.50), (r32)screenHeight*0.25};
+    Vector2 ball4_position = {((r32)screenWidth*0.50), (r32)screenHeight*0.75};
+
     SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 
-    Vector2 mouse_position;
     // Main game loop
     while (!WindowShouldClose())                // Detect window close button or ESC key
     {
-//        ShowCursor();
+        // Update
+        //----------------------------------------------------------------------------------
+        if(ball1_position.x < screenWidth)
+        {
+            ball1_position.x += 5.0f;
+        }
+        else 
+        {
+            ball1_position = {((r32)screenWidth*0.25), ((r32)screenHeight/2)}; 
+        }
+
+        if(ball2_position.x > 0)
+        {
+            ball2_position.x -= 5.0f;
+        }
+        else 
+        {
+            ball2_position = {((r32)screenWidth*0.75), ((r32)screenHeight/2)}; 
+        }
+
+        if(ball3_position.y < screenHeight)
+        {
+            ball3_position.y += 5.0f;
+        }
+        else 
+        {
+            ball3_position = {((r32)screenWidth*0.50), ((r32)screenHeight*0.25)}; 
+        }
+
+        if(ball4_position.y > 0)
+        {
+            ball4_position.y -= 5.0f;
+        }
+        else 
+        {
+            ball4_position = {((r32)screenWidth*0.50), ((r32)screenHeight*0.75)}; 
+        }
+
+
+
+
+        //----------------------------------------------------------------------------------
+        
         // Draw
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
             ClearBackground(RAYWHITE);
 
-            Rectangle rec_one = {400, 225, 40, 40};
-            Rectangle rec_two = {300, 225, 40, 40};
-            DrawRectangleRec(rec_one, RED);
-            DrawRectangleRec(rec_two, BLUE);
-
-            if(CheckCollisionRecs(rec_one, rec_two))
-            {
-                int x = 1;
-            }
+            DrawCircleV(ball1_position, 50, RED);
+            DrawCircleV(ball2_position, 50, BLUE);
+            DrawCircleV(ball3_position, 50, GREEN);
+            DrawCircleV(ball4_position, 50, YELLOW);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
