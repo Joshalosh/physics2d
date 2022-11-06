@@ -15,10 +15,9 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "Physics2D");
 
-    Vector2 ball1_position = {((r32)screenWidth*0.25), (r32)screenHeight/2};
-    Vector2 ball2_position = {((r32)screenWidth*0.75), (r32)screenHeight/2};
-    Vector2 ball3_position = {((r32)screenWidth*0.50), (r32)screenHeight*0.25};
-    Vector2 ball4_position = {((r32)screenWidth*0.50), (r32)screenHeight*0.75};
+    Vector2 ball_position = {(r32)screenWidth/2, (r32)screenHeight/2};
+    v2 velocity = {};
+    v2 acceleration = {};
 
     SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -28,44 +27,28 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        if(ball1_position.x < screenWidth)
+        if(IsKeyDown(KEY_RIGHT)) acceleration.x =  1.0f;
+        if(IsKeyDown(KEY_LEFT)) acceleration.x  = -1.0f;
+        if(IsKeyDown(KEY_UP)) acceleration.y    = -1.0f;
+        if(IsKeyDown(KEY_DOWN)) acceleration.y  =  1.0f;
+
+        if((acceleration.x != 0.0f) && (acceleration.y != 0.0f))
         {
-            ball1_position.x += 5.0f;
-        }
-        else 
-        {
-            ball1_position = {((r32)screenWidth*0.25), ((r32)screenHeight/2)}; 
+            acceleration *= 0.707106781187f;
         }
 
-        if(ball2_position.x > 0)
-        {
-            ball2_position.x -= 5.0f;
-        }
-        else 
-        {
-            ball2_position = {((r32)screenWidth*0.75), ((r32)screenHeight/2)}; 
-        }
+        r32 speed = 1.5f;
+        acceleration *= speed;
 
-        if(ball3_position.y < screenHeight)
-        {
-            ball3_position.y += 5.0f;
-        }
-        else 
-        {
-            ball3_position = {((r32)screenWidth*0.50), ((r32)screenHeight*0.25)}; 
-        }
+        v2 new_position = {};
+        v2 position_offset = {};
+        position_offset = (0.5f*acceleration*Square(GetFrameTime()) +
+                           velocity*GetFrameTime() +
+                           position_offset);
+        velocity = acceleration*GetFrameTime() + velocity;
 
-        if(ball4_position.y > 0)
-        {
-            ball4_position.y -= 5.0f;
-        }
-        else 
-        {
-            ball4_position = {((r32)screenWidth*0.50), ((r32)screenHeight*0.75)}; 
-        }
-
-
-
+        ball_position.x = position_offset.x;
+        ball_position.y = position_offset.y;
 
         //----------------------------------------------------------------------------------
         
@@ -75,10 +58,7 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawCircleV(ball1_position, 50, RED);
-            DrawCircleV(ball2_position, 50, BLUE);
-            DrawCircleV(ball3_position, 50, GREEN);
-            DrawCircleV(ball4_position, 50, YELLOW);
+            DrawCircleV(ball_position, 50, RED);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

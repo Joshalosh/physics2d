@@ -255,5 +255,17 @@ operator-(v3 a, v3 b)
     return result;
 }
 
+//
+// SCALAR OPERATIONS
+//
+
+inline r32
+Square(r32 a)
+{
+    r32 result = a*a;
+
+    return result;
+}
+
 #define ENGINE_MATH_H
 #endif
