@@ -10,14 +10,13 @@ int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screen_width  = 800;
+    const int screen_height = 450;
 
-    InitWindow(screenWidth, screenHeight, "Physics2D");
+    InitWindow(screen_width, screen_height, "Physics2D");
 
-    Vector2 ball_position = {(r32)screenWidth/2, (r32)screenHeight/2};
-    v2 velocity = {};
-    v2 acceleration = {};
+    v2 ball_position     = {(r32)screen_width/2, (r32)screen_height/2};
+    v2 velocity          = {};
 
     SetTargetFPS(60);                           // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -27,6 +26,9 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
+        // Need to set the acceleration inside the loop so that it initialises to 0 at the beginning
+        // of every frame.
+        v2 acceleration = {};
         if(IsKeyDown(KEY_RIGHT)) acceleration.x =  1.0f;
         if(IsKeyDown(KEY_LEFT)) acceleration.x  = -1.0f;
         if(IsKeyDown(KEY_UP)) acceleration.y    = -1.0f;
@@ -37,18 +39,19 @@ int main(void)
             acceleration *= 0.707106781187f;
         }
 
-        r32 speed = 1.5f;
+        r32 speed     = 8800;
         acceleration *= speed;
 
-        v2 new_position = {};
-        v2 position_offset = {};
-        position_offset = (0.5f*acceleration*Square(GetFrameTime()) +
-                           velocity*GetFrameTime() +
-                           position_offset);
+        acceleration -= velocity * 10.0f;
+
+        ball_position = (0.5f*acceleration*Square(GetFrameTime()) +
+                         velocity*GetFrameTime() +
+                         ball_position);
         velocity = acceleration*GetFrameTime() + velocity;
 
-        ball_position.x = position_offset.x;
-        ball_position.y = position_offset.y;
+        Vector2 new_position;
+        new_position.x = ball_position.x;
+        new_position.y = ball_position.y;
 
         //----------------------------------------------------------------------------------
         
@@ -56,9 +59,9 @@ int main(void)
         //----------------------------------------------------------------------------------
         BeginDrawing();
 
-            ClearBackground(RAYWHITE);
+        ClearBackground(RAYWHITE);
 
-            DrawCircleV(ball_position, 50, RED);
+        DrawCircleV(new_position, 50, RED);
 
         EndDrawing();
         //----------------------------------------------------------------------------------

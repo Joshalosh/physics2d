@@ -179,6 +179,14 @@ operator-(v2 a, v2 b)
     return result;
 }
 
+inline v2 &
+operator-=(v2 &a, v2 b)
+{
+    a = a - b;
+
+    return a;
+}
+
 //
 // Vec3 OPERATIONS
 //
