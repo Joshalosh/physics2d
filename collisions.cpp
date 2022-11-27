@@ -20,4 +20,3 @@ b32 CircleVsCircle(circle a, circle b)
 
     return result;
 }
-
